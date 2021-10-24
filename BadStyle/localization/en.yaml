@@ -91,91 +91,104 @@ STRINGS:
     # /filters
     list_filters: "فیلترها در <b>{chat_name}</b>:\n"
 
+
+    # /addfilter
+    anon_detected: Being anonymous admin, you cannot add new filters, use connections instead.
+    regex_too_slow: "Your regex pattern matches too slowly (more than the half of second) and it can't be added!"
+    cancel_btn: "🛑 Cancel"
+    adding_filter: |
+      Adding filter <code>{handler}</code> in <b>{chat_name}</b>
+      Select action below:
+    saved: "New filter was successfully saved!"
+
+    # /filters
+    list_filters: "Filters in <b>{chat_name}</b>:\n"
+
     # /delfilter
-    no_such_filter: من نمی توانم آن فیلتر را در <b>{chat_name}</b> پیدا کنم، می توانید با دستور <code>/filters</code> بررسی کنید که چه فیلترهایی فعال هستند.
-    del_filter: "فیلتر با کنترل کننده '<code>{handler}</code>' با موفقیت حذف شد!"
+    no_such_filter: I can't find that filter in <b>{chat_name}</b>, you can check what filters are enabled with the <code>/filters</code> command.
+    del_filter: "Filter with handler '<code>{handler}</code>' was successfully removed!"
     select_filter_to_remove: |
-      من فیلترهای زیادی با کنترلر '<code>{handler}</code>' پیدا کرده ام.
-      لطفاً یکی را برای حذف انتخاب کنید remove:
+      I have found many filters with handler '<code>{handler}</code>'.
+      Please select one to remove:
     # /delfilters or /delallfilters
-    not_chat_creator: فقط سازندگان چت می توانند از این دستور استفاده کنند!
-    delall_header: با این کار تمام فیلترهای این چت حذف می شود.  این غیر قابل برگشت است
-    confirm_yes: ⚠ همه را حذف کنید
-    confirm_no: ❌ کنسل
-    delall_success: همه ({count}) فیلترها در این گپ با موفقیت حذف شدند!
+    not_chat_creator: Only chat creators can use this command!
+    delall_header: This would delete all filters in this chat. This IS irreversible.
+    confirm_yes: ⚠ Delete all
+    confirm_no: ❌ Cancel
+    delall_success: Successfully deleted all ({count}) filters in this chat!
 
   warns:
     # /warn
-    warn_sofi: "هیچ راهی برای هشدار دادن به خودم ندارم!"
-    warn_self: "میخوای به خودت هشدار بدی؟ فقط چت رو ترک کن."
-    warn_admin: "عع .. شما اشتباه می کنید. شما نمی توانید به مدیر اخطار دهید."
-    warn: "{admin} هشدار داده است {user} در <b>{chat_name}</b>\n"
-    warn_bun: "از هشدارها فراتر رفته است! {user} ممنوع شده است!"
-    warn_num: "هشدار می دهد: {curr_warns}/{max_warns}\n"
-    warn_rsn: "دلیل: <code>{reason}</code>\n"
-    max_warn_exceeded: از هشدارها فراتر رفته است!  {user} {action} بوده است!
-    max_warn_exceeded:tmute: از هشدارها فراتر رفته است!  {user} برای {time} نادیده گرفته شده است!
+    warn_sofi: "Haha no way to warn myself!"
+    warn_self: "Do you wanna warn yourself? Just leave the chat then."
+    warn_admin: "Well.. you are wrong. You can't warn an admin."
+    warn: "{admin} has warned {user} in <b>{chat_name}</b>\n"
+    warn_bun: "Warnings has been exceeded! {user} has been banned!"
+    warn_num: "Warns: {curr_warns}/{max_warns}\n"
+    warn_rsn: "Reason: <code>{reason}</code>\n"
+    max_warn_exceeded: Warnings has been exceeded! {user} has been {action}!
+    max_warn_exceeded:tmute: Warnings has been exceeded! {user} has been tmuted for {time}!
 
     # warn rmv callback
-    warn_no_admin_alert: "⚠ شما مدیر نیستید و نمی توانید اخطارها را حذف کنید!"
-    warn_btn_rmvl_success: "✅ اخطار توسط {admin} حذف شد!"
+    warn_no_admin_alert: "⚠ You are NOT admin and cannot remove warnings!"
+    warn_btn_rmvl_success: "✅ Warning removed by {admin}!"
 
     # /warns
-    warns_header: "اینها هشدارهای شما در این چت \n\n" هستند
-    warns: "{count} : <code>{reason}</code> توسط {admin}\n"
-    no_warns: "خب، {user} هیچ هشداری ندارد."
+    warns_header: "Here are your warns in this chat \n\n"
+    warns: "{count} : <code>{reason}</code> by {admin}\n"
+    no_warns: "Well, {user} doesn't have any warns."
 
     # /warnlimit
-    warn_limit: "محدودیت هشدار در <b>{chat_name}</b> در حال حاضر این است: <code>{num}</code>"
-    warnlimit_short: "حد هشدار باید حداقل 2 باشد!"
-    warnlimit_long: 'محدودیت هشدار باید کمتر از 1000 باشد!'
-    warnlimit_updated: "✅ محدودیت هشدار با موفقیت به {num} به روز شد"
+    warn_limit: "Warn limit in <b>{chat_name}</b> is currently: <code>{num}</code>"
+    warnlimit_short: 'Warnlimit should be at least 2!'
+    warnlimit_long: 'Warnlimit should be shorter than 1 000!'
+    warnlimit_updated: '✅ Warnlimit successfully updated to {num}'
 
     # /delwarns
-    purged_warns: "{admin} بازنشانی <code>{num}</code> هشدار می‌دهد {user} در <b>{chat_title}</b>!"
-    usr_no_wrn: "{user} هیچ هشداری برای تنظیم مجدد ندارد."
-    rst_wrn_sofi: 'بداستایل هرگز هشداری برای تنظیم مجدد نداشت.'
-    not_digit: محدودیت های هشدار باید رقمی باشد!
+    purged_warns: "{admin} reset <code>{num}</code> warns of {user} in <b>{chat_title}</b>!"
+    usr_no_wrn: "{user} doesn't have any warns to reset."
+    rst_wrn_sofi: 'Daisy never had warns to reset.'
+    not_digit: Warnlimits should be digits!
 
     # /warnmode
-    same_mode: این حالت فعلی است!  چگونه می توانم آن را تغییر دهم؟
-    no_time: برای انتخاب حالت 'tmute' باید زمان را ذکر کنید!
-    invalid_time: زمان نامعتبر!
-    warnmode_success: حالت هشدار <b>%s</b> با موفقیت به <b>%s</b> تغییر کرد!
+    same_mode: This is the current mode! How can I change it?
+    no_time: For selecting mode 'tmute' you have to mention time!
+    invalid_time: Invalid time!
+    warnmode_success: Warn mode of <b>%s</b> has successfully changed to <b>%s</b>!
     wrng_args: |
-      اینها گزینه های موجود هستند options:
+      These are the available options:
     mode_info: |
-      حالت فعلی در چت این هست <b>%s</b>.
-    banned: ممنوع شد
-    muted: بیصدا شد 
+      Current mode in this chat is <b>%s</b>.
+    banned: banned
+    muted: muted
 
-    filters_title: به کاربر هشدار دهید
-    filter_handle_rsn: عملکرد فیلتر خودکار! 
+    filters_title: Warn the user
+    filter_handle_rsn: Automated filter action!
 
   msg_deleting:
-    no_rights_purge: "شما اختیارات کافی برای پاکسازی در این گروه را ندارید!"
-    reply_to_msg: "به یک پیام که میخواهید حذف کنید ریپلای بزنید!"
-    purge_error: "من نمی توانم به پاکسازی ادامه دهم، بیشتر به این دلیل که شما پاکسازی را از پیامی شروع کردید که بیش از 2 روز ارسال شده بود.."
-    fast_purge_done: "<b>پاکسازی سریع به پایان رسید! </b>\nاین پیام در 5 ثانیه حذف می شود."
-    purge_user_done: "همه پیام های {user} با موفقیت حذف شدند!"
+    no_rights_purge: "You don't have enough rights to purge in this group!"
+    reply_to_msg: "Reply to a message to delete!"
+    purge_error: "I can't continue purge, mostly because you started purge from a message that was sent older than 2 days."
+    fast_purge_done: "<b>Fast purge completed!</b>\nThis message will be removed in 5 seconds."
+    purge_user_done: "All messages from {user} were successfully deleted!"
   misc:
-    your_id: "آیدی شما: <code>{id}</code>\n"
-    chat_id: "آیدی گروه: <code>{id}</code>\n"
-    user_id: "{user}'s آیدی: <code>{id}</code>\n"
-    conn_chat_id: "آیدی چت متصل شده فعلی: <code>{id}</code>"
-    help_btn: "برای راهنمایی کلیک کن!"
-    help_txt: "برای راهنمایی روی زیر کلیک کنید!"
+    your_id: "Your ID: <code>{id}</code>\n"
+    chat_id: "Group ID: <code>{id}</code>\n"
+    user_id: "{user}'s ID: <code>{id}</code>\n"
+    conn_chat_id: "Current connected chat ID: <code>{id}</code>"
+    help_btn: "Click me for help!"
+    help_txt: "Click the button below for help!"
 
-    delmsg_filter_title: 'پیام را پاک کنید'
-    send_text: لطفا پیام پاسخ را ارسال کنید!
-    replymsg_filter_title: 'پاسخ به پیام'
+    delmsg_filter_title: 'Delete the message'
+    send_text: Please send the reply message!
+    replymsg_filter_title: 'Reply to message'
 
     send_customised_reason: Send the <i>reason</i> you want to include in action message. "<code>None</code>" for <i>no reason</i> to be given!
-    expected_text: انتظار یک پیام متنی!
+    expected_text: Expected a text message!
 
   promotes:
-    promote_success: "{user} در {chat_name} با موفقیت ارتقا یافت!"
-    promote_title: "\nیه نقش سفارشی <code>{role}</code>!"
+    promote_success: "{user} was successfully promoted in {chat_name}!"
+    promote_title: "\nWith custom role <code>{role}</code>!"
     rank_to_loong: "Custom role text cannot be longer than 16 symbols."
     promote_failed: "Promotion failed! Check if I have rights to."
     demote_success: "{user} was successfully demoted in {chat_name}!"
@@ -186,14 +199,14 @@ STRINGS:
     emoji_not_allowed: "I'm sorry, but admin roles can't have emojis 😞"
 
   pm_menu:
-    start_hi_group: 'سلام من بداستایل هستم'
-    start_hi: "سلام! نام من <b>بداستایل هست.</b>\nمن می‌توانم با ویژگی‌های مفید به مدیریت گروه‌های شما کمک کنم، در صورت تمایل مرا به گروه‌های خود اضافه کنید!"
-    btn_source: "📜 کد منبع"
-    btn_help: "❔ کمک"
-    btn_lang: "🇺🇸 زبان"
-    btn_channel: "🙋‍♀️ کانال بداستایل"
-    btn_group: "👥 گروه بداستایل"
-    btn_group_help: "برای راهنمایی کلیک کنید!"
+    start_hi_group: 'Hey there! My name is Daisy'
+    start_hi: "Hey there! My name is <b>Daisy.</b>\nI can help manage your groups with useful features, feel free to add me to your groups!"
+    btn_source: "📜 Source code"
+    btn_help: "❔ Help"
+    btn_lang: "🇺🇸 Language"
+    btn_channel: "🙋‍♀️ Daisy News"
+    btn_group: "👥 Daisy Support"
+    btn_group_help: "Click me for help!"
     back: "🏃‍♂️ Back"
 
     # /help
@@ -449,7 +462,7 @@ STRINGS:
     select_pm_lang: "\n<b>Select your new language:</b>"
     select_chat_lang: "\n<b>Select new chat language:</b>"
     crowdin_btn: "🌎 Help us with translation"
-    help_us_translate: "\n\n<a href=\"https://crowdin.com/project/BadStyle\">🌎 Help us improve our translations</a>"
+    help_us_translate: "\n\n<a href=\"https://crowdin.com/project/DaisyXx\">🌎 Help us improve our translations</a>"
     not_supported_lang: This language is not supported!
     lang_changed: Language was changed to <b>{lang_name}</b>.
     see_translators: 👥 See translators
@@ -548,27 +561,27 @@ STRINGS:
     user_not_in_chat: User is not in this chat!
 
     # Kicks
-    kick_BadStyle: Instead of trying kick me you could spend your time better. Thats just boring.
+    kick_DaisyX: Instead of trying kick me you could spend your time better. Thats just boring.
     kick_admin: Kicking admin is not best idea thought.
     kick_self: If you want to kick yourself - just leave this chat. I would rather not see you than look at these pathetic attempts at self-punishment.
     user_kicked: "{user} was kicked by {admin} in {chat_name}."
 
     # Mutes
-    mute_BadStyle: Actually, I'll be happy to shut up you instead.
+    mute_DaisyX: Actually, I'll be happy to shut up you instead.
     mute_admin: If you think you can shut up an admin, you are wrong!
     mute_self: If you want to mute yourself - just stop talking! Better to thought a fool than open your mouth and remove all doubt.
     user_muted: "{user} was muted by {admin} in {chat_name}."
-    unmute_BadStyle: Actually, I'm not muted.
+    unmute_DaisyX: Actually, I'm not muted.
     unmute_admin: Haha no, try muting him first!
     unmute_self: Should I mute you first?
     user_unmuted: "{user} was unmuted by {admin} in {chat_name}."
 
     # Bans
-    ban_BadStyle: No, I won't do it! Ask the chat creator to do it!
+    ban_DaisyX: No, I won't do it! Ask the chat creator to do it!
     ban_admin: Haha, let's <code>/demote</code> him first.
     ban_self: Why are you trying to ban yourself?
     user_banned: "{user} was banned by {admin} in {chat_name}."
-    unban_BadStyle: Actually, I'm not banned.
+    unban_DaisyX: Actually, I'm not banned.
     unban_admin: Haha no, try banning him first!
     unban_self: Should I ban you first?
     user_unband: "{user} was unbanned by {admin} in {chat_name}."
@@ -616,7 +629,7 @@ STRINGS:
     # success_remove_rules_note: "Successfully removed rules note in <b>{}</b>."
   greetings:
     default_welcome: "Welcome {mention}! How are you?"
-    thank_for_add: "Thanks for adding me to your group! Take a look at /help and follow my news channel @badstyle_channel."
+    thank_for_add: "Thanks for adding me to your group! Take a look at /help and follow my news channel @DaisyXUpdates."
     default_security_note: "Welcome {mention}! Please press button below to verify yourself as human!"
 
     bool_invalid_arg: Invalid argument, expected <code>on</code>/<code>off</code>.
