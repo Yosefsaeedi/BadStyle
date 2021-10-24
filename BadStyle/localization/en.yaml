@@ -5,16 +5,16 @@ language_info:
 STRINGS:
   notes:
     # /save
-    note_saved: "🗒 Note <code>{note_name}</code> saved in <b>{chat_title}</b>!"
-    note_updated: "🗒 Note <code>{note_name}</code> updated in <b>{chat_title}</b>!"
-    you_can_get_note: "\nYou can retrieve this note by using <code>/get {note_name}</code>, or <code>#{note_name}</code>"
+    note_saved: "🗒 یادداشت <code>{note_name}</code>  ذخیره شده در <b>{chat_title}</b>!"
+    note_updated: "🗒 یادداشت <code>{note_name}</code> در <b>{chat_title}</b> به‌روزرسانی شد!"
+    you_can_get_note: "\nمی توانید این یادداشت را با استفاده از <code>/get {note_name}</code> یا <code>#{note_name}</code> بازیابی کنید."
     # Translator note: please keep sure that you don't have space in the end of string
-    note_aliases: "\nNote aliases:"
-    blank_note: "Saving blank note is not allowed!"
-    notename_cant_contain: "Note name can't contain \"<code>{symbol}</code>\"!"
+    note_aliases: "\nنام مستعار را یادداشت کنید:"
+    blank_note: "ذخیره یادداشت خالی مجاز نیست!"
+    notename_cant_contain: "نام یادداشت نمی تواند حاوی \"<code>{symbol}</code>\" باشد!"
 
     # /get
-    cant_find_note: I can't find this note in <b>{chat_name}</b>!
+    cant_find_note: من نمی توانم این یادداشت را در <b>{chat_name}</b> پیدا کنم!
     no_note: "Can't find that note."
     no_notes_pattern: "No notes found by pattern <code>%s</code>"
     u_mean: "\nDid you mean <code>#{note_name}</code>?"
@@ -186,14 +186,14 @@ STRINGS:
     emoji_not_allowed: "I'm sorry, but admin roles can't have emojis 😞"
 
   pm_menu:
-    start_hi_group: 'Hey there! My name is Daisy'
-    start_hi: "Hey there! My name is <b>Daisy.</b>\nI can help manage your groups with useful features, feel free to add me to your groups!"
-    btn_source: "📜 Source code"
-    btn_help: "❔ Help"
-    btn_lang: "🇺🇸 Language"
-    btn_channel: "🙋‍♀️ Daisy News"
-    btn_group: "👥 Daisy Support"
-    btn_group_help: "Click me for help!"
+    start_hi_group: 'سلام من بداستایل هستم'
+    start_hi: "سلام! نام من <b>بداستایل هست.</b>\nمن می‌توانم با ویژگی‌های مفید به مدیریت گروه‌های شما کمک کنم، در صورت تمایل مرا به گروه‌های خود اضافه کنید!"
+    btn_source: "📜 کد منبع"
+    btn_help: "❔ کمک"
+    btn_lang: "🇺🇸 زبان"
+    btn_channel: "🙋‍♀️ کانال بداستایل"
+    btn_group: "👥 گروه بداستایل"
+    btn_group_help: "برای راهنمایی کلیک کنید!"
     back: "🏃‍♂️ Back"
 
     # /help
