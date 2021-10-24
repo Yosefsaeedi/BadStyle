@@ -1,5 +1,5 @@
-#    Copyright (C) 2020-2021 by @InukaAsith
-#    This programme is a part of Daisy TG bot project
+#    Copyright (C) 2020-2021 by @bad_style
+#    This programme is a part of badstyle bot project
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -66,7 +66,7 @@ def _onUnMuteRequest(client, cb):
                 except UserNotParticipant:
                     client.answer_callback_query(
                         cb.id,
-                        text=f"❗ Join our @{channel} channel and press 'UnMute Me' button.",
+                        text=f"❗ به کانال @{channel} ما بپیوند ودکمه 'لغو بیصداکردن من' را فشاردهید.",
                         show_alert=True,
                     )
                 except ChannelPrivate:
@@ -76,20 +76,20 @@ def _onUnMuteRequest(client, cb):
             else:
                 client.answer_callback_query(
                     cb.id,
-                    text="❗ You have been muted by admins due to some other reason.",
+                    text="❗ شما توسط ادمین ها بنابر دلایلی بی صدا شده اید.",
                     show_alert=True,
                 )
         else:
             if not client.get_chat_member(chat_id, BOT_ID).status == "administrator":
                 client.send_message(
                     chat_id,
-                    f"❗ **{cb.from_user.mention} is trying to UnMute himself but i can't unmute him because i am not an admin in this chat add me as admin again.**\n__#Leaving this chat...__",
+                    f"❗ **{cb.from_user.mention} درحال تلاش برای لغو بیصدا کردن خود است اما من نمیتوانم بی صدا بودن اورا لغو کنم زیرا من مدیر این چت نیستم دوباره مرا مدیرکنید .**\n__#ترک این چت...__",
                 )
 
             else:
                 client.answer_callback_query(
                     cb.id,
-                    text="❗ Warning! Don't press the button when you cn talk.",
+                    text="❗ هنوز عضو کانال یا گروه اجباری نشده برای لغو عضویت از دستورات استفاده کنید.",
                     show_alert=True,
                 )
 
@@ -115,7 +115,7 @@ def _check_member(client, message):
                 except UserNotParticipant:
                     try:
                         sent_message = message.reply_text(
-                            "Welcome {} 🙏 \n **You havent joined our @{} Channel yet** 😭 \n \nPlease Join [Our Channel](https://t.me/{}) and hit the **UNMUTE ME** Button. \n \n ".format(
+                            "خوش آمدید {} 🙏 \n هنوز عضو نشدی به @{}  کانال ما  🥲 \n\ nلطفا عضو [کانال یا گروه](https://t.me/{}) ما بشو و بعد روی دکمه لغو بیصداکردن من بزن. \n \n ".format(
                                 message.from_user.mention, channel, channel
                             ),
                             disable_web_page_preview=True,
@@ -123,13 +123,13 @@ def _check_member(client, message):
                                 [
                                     [
                                         InlineKeyboardButton(
-                                            "Join Channel",
+                                            "عضو شو🙃",
                                             url="https://t.me/{}".format(channel),
                                         )
                                     ],
                                     [
                                         InlineKeyboardButton(
-                                            "UnMute Me", callback_data="onUnMuteRequest"
+                                            "👾لغو بیصدا کردن من", callback_data="onUnMuteRequest"
                                         )
                                     ],
                                 ]
@@ -140,7 +140,7 @@ def _check_member(client, message):
                         )
                     except ChatAdminRequired:
                         sent_message.edit(
-                            "❗ **Daisy is not admin here..**\n__Give me ban permissions and retry.. \n#Ending FSub...__"
+                            "❗ سبک بد اینجا مدیر نیست..\n__مجوزهای ممنوعیت رو به من بدهید ودوباره امتحان کنید.. \n#پایان عضویت اجباری ...__"
                         )
                     except RPCError:
                         return
@@ -148,7 +148,7 @@ def _check_member(client, message):
                 except ChatAdminRequired:
                     client.send_message(
                         chat_id,
-                        text=f"❗ **I not an admin of @{channel} channel.**\n__Give me admin of that channel and retry.\n#Ending FSub...__",
+                        text=f"❗ **من ادمین کانال @{channel} نیستم.**\n__من رو ادمین کن و دوباره امتحان کن.\n#پایان عضویت اجباری...__",
                     )
                 except ChannelPrivate:
                     return
@@ -156,7 +156,7 @@ def _check_member(client, message):
             return
 
 
-@pbot.on_message(filters.command(["forcesubscribe", "forcesub"]) & ~filters.private)
+@pbot.on_message(filters.command(["عضواجباری", "اجباری"]) & ~filters.private)
 def config(client, message):
     user = client.get_chat_member(message.chat.id, message.from_user.id)
     if user.status is "creator" or user.user.id == 1141839926:
@@ -164,12 +164,12 @@ def config(client, message):
         if len(message.command) > 1:
             input_str = message.command[1]
             input_str = input_str.replace("@", "")
-            if input_str.lower() in ("off", "no", "disable"):
+            if input_str.lower() in ("فعال", "خاموش", "غیرفعال"):
                 sql.disapprove(chat_id)
-                message.reply_text("❌ **Force Subscribe is Disabled Successfully.**")
-            elif input_str.lower() in ("clear"):
+                message.reply_text("❌ **عضویت اجباری با موفقیت غیرفعال شد.**")
+            elif input_str.lower() in ("پاکسازی"):
                 sent_message = message.reply_text(
-                    "**Unmuting all members who are muted by me...**"
+                    "**نادیده گرفتن همه اعضایی که توسط من بی صدا شده اند ...**"
                 )
                 try:
                     for chat_member in client.get_chat_members(
@@ -178,56 +178,72 @@ def config(client, message):
                         if chat_member.restricted_by.id == BOT_ID:
                             client.unban_chat_member(chat_id, chat_member.user.id)
                             time.sleep(1)
-                    sent_message.edit("✅ **UnMuted all members who are muted by me.**")
+                    sent_message.edit("✅ **همه اعضایی که توسط من بی صدا شده اند را لغو کنید.**")
                 except ChatAdminRequired:
                     sent_message.edit(
-                        "❗ **I am not an admin in this chat.**\n__I can't unmute members because i am not an admin in this chat make me admin with ban user permission.__"
+                        "❗ من در این چت ادمین نیستم.\n__من نمی توانم بیصدا بودن اعضا رو لغوکنم.__"
                     )
             else:
                 try:
                     client.get_chat_member(input_str, "me")
                     sql.add_channel(chat_id, input_str)
                     message.reply_text(
-                        f"✅ **Force Subscribe is Enabled**\n__Force Subscribe is enabled, all the group members have to subscribe this [channel](https://t.me/{input_str}) in order to send messages in this group.__",
+                        f"✅ **عضویت اجباری فعال است**\n__عضویت اجباری فعال است ، همه اعضای گروه برای ارسال پیام باید در این گروه باید در این  [کانال یا گروه](https://t.me/{input_str}) عضو بشن.__",
                         disable_web_page_preview=True,
                     )
                 except UserNotParticipant:
                     message.reply_text(
-                        f"❗ **Not an Admin in the Channel**\n__I am not an admin in the [channel](https://t.me/{input_str}). Add me as a admin in order to enable ForceSubscribe.__",
+                        f"❗ **من ادمین کانال نیستم**\n__من ادمین نیستم در  [کانال یا گروه](https://t.me/{input_str}). برای فعال کردن عضویت اجباری من را ادمین کنید.__",
                         disable_web_page_preview=True,
                     )
                 except (UsernameNotOccupied, PeerIdInvalid):
-                    message.reply_text(f"❗ **Invalid Channel Username.**")
+                    message.reply_text(f"❗ **نام کاربری کانال یا گروه نامعتبر .**")
                 except Exception as err:
-                    message.reply_text(f"❗ **ERROR:** ```{err}```")
+                    message.reply_text(f"❗ **خطا:** ```{err}```")
         else:
             if sql.fs_settings(chat_id):
                 message.reply_text(
-                    f"✅ **Force Subscribe is enabled in this chat.**\n__For this [Channel](https://t.me/{sql.fs_settings(chat_id).channel})__",
+                    f"✅ **عضویت اجباری فعال است.**\n__برای این [Channel](https://t.me/{sql.fs_settings(chat_id).channel})__",
                     disable_web_page_preview=True,
                 )
             else:
-                message.reply_text("❌ **Force Subscribe is disabled in this chat.**")
+                message.reply_text("❌ **عضویت اجباری در این چت غیرفعال است.**")
     else:
         message.reply_text(
-            "❗ **Group Creator Required**\n__You have to be the group creator to do that.__"
+            "❗ **به مالک گروه نیاز است**\n__You برای انجام این کار باید مالک گروه باشید.__"
         )
 
 
 __help__ = """
-<b>ForceSubscribe:</b>
-- Daisy can mute members who are not subscribed your channel until they subscribe
-- When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them
-<b>Setup</b>
-1) First of all add me in the group as admin with ban users permission and in the channel as admin.
-Note: Only creator of the group can setup me and i will not allow force subscribe again if not done so.
- 
-<b>Commmands</b>
- - /forcesubscribe - To get the current settings.
- - /forcesubscribe no/off/disable - To turn of ForceSubscribe.
- - /forcesubscribe {channel username} - To turn on and setup the channel.
- - /forcesubscribe clear - To unmute all members who muted by me.
-Note: /forcesub is an alias of /forcesubscribe
+🥇در صورت فعال بودن عضویت اجباری، افرادی که در گروه یا کانالی که برای عضویت اجباری گذاشتید نباشن از چت کردن بیصدا میکنیم و یک دکمه باصداکردن به آنها نشان می دهم.  وقتی آنها عضو ان کانال یا گروه شدن دکمه را فشار می دهند ، من به آنها اجازه چت کردن میدهم ✅
+
+روش اســتفــاده 👇
+🔅اول از همه من را در گروه و در کانال به عنوان مدیر اضافه کنید 🔅
+💮 به زبان ساده هم تو گروه اصلی من رو مدیر کنید هم تو گروه یا کانالی که میخواید افراد عضو اون بشن تامام❎
+
+❗️فقط مالک گروه میتونه از من استفاده کنه ❕
+
+دستــورات 👇 لطفا به فاصله بین کلمات دقت کنید
+
+/عضواجباری     یــا      /اجباری
+برای دریافت تنظیمات فعلی 
+
+🧩برای روشن کردن عضو اجباری و راه اندازی از دستور زیر استفاده کنید 👇
+/عضواجباری @نام آیدی کانال یا گروه
+دستور+ خط فاصله+ ایدی کانال یا گروه
+
+♟برای فعال یا غیر فعال کردن عضویت اجباری کافیه
+
+ دستور+خط فاصله + فعال یا غیرفعال
+
+/عضواجباری فعال یا /عضواجباری غیرفعال
+⭐توجه کنید بعد از غیر فعال سازی برای این که همه کاربرانی که عضویت اجباری رو انجام ندادن بتونن چت کنن دستور پاکسازی رو اجراکنید 👇
+
+♻️پاکسازی تمام کسانی که بیصدا شدن 
+/عضواجباری پاکسازی
+
+🔆توجه کنید که میتونید از /اجباری به جای
+ /عضواجباری استفاده کنید🔆
  
 """
-__mod_name__ = "Force Subscribe "
+__mod_name__ = "عضویت اجباری"
