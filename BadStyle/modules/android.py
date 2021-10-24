@@ -429,24 +429,24 @@ async def orangefox(message):
     return
 
 
-__mod_name__ = "Android"
+__mod_name__ = "اندروید"
 
 __help__ = """
-Module specially made for Android users.
+ماژول مخصوص کاربران اندروید.
 
 <b>GSI</b>
-- /phh: Get the latest PHH AOSP GSIs.
-- /phhmagisk: Get the latest PHH Magisk.
+- /phh: جدیدترین PHS AOSP GSI را دریافت کنید.
+- /phhmagisk: جدیدترین PHH Magisk را دریافت کنید.
 
-<b>Device firmware:</b>
-- /samcheck (model) (csc): Samsung only - shows the latest firmware info for the given device, taken from samsung servers.
-- /samget (model) (csc): Similar to the <code>/samcheck</code> command but having download buttons.
+<b>سیستم عامل دستگاه:</b>
+- /samcheck (model) (csc): فقط سامسونگ - آخرین اطلاعات سیستم عامل دستگاه مورد نظر را که از سرورهای سامسونگ گرفته شده است نشان می دهد.
+- /samget (model) (csc): مشابه دستور <code>/samcheck </code> اما دارای دکمه های بارگیری است.
 
 <b>Misc</b>
-- /magisk: Get latest Magisk releases.
-- /twrp (codename): Gets latest TWRP for the android device using the codename.
-- /ofox (codename): Gets latest OFRP for the android device using the codename.
-- /ofox devices: Sends the list of devices with stable releases supported by OFRP.
-- /models (codename): Search for Android device models using codename.
-- /whatis (codename): Find out which smartphone is using the codename.
+- /magisk: جدیدترین نسخه های Magisk را دریافت کنید.
+- /twrp (codename): با استفاده از نام رمز جدیدترین TWRP را برای دستگاه اندرویدی دریافت می کند.
+- /ofox (codename): با استفاده از نام کد جدیدترین OFRP را برای دستگاه اندرویدی دریافت می کند.
+- /ofox devices: لیست دستگاههای دارای نسخه های پایدار که توسط OFRP پشتیبانی می شوند را ارسال می کند.
+- /models (codename): مدلهای دستگاه Android را با استفاده از codename جستجو کنید.
+- /whatis (codename): دریابید که کدام اسمارت فون از codename استفاده می کند.
 """
