@@ -60,42 +60,42 @@ async def fetch(url):
         return
 
 
-daisy_chats = []
+badstyle_chats = []
 en_chats = []
 # AI Chat (C) 2020-2021 by @InukaAsith
 
 
 @BadStyle.on_message(
-    filters.command("chatbot") & ~filters.edited & ~filters.bot & ~filters.private
+    filters.command("ربات") & ~filters.edited & ~filters.bot & ~filters.private
 )
 @admins_only
 async def hmm(_, message):
-    global daisy_chats
+    global badstyle_chats
     if len(message.command) != 2:
         await message.reply_text(
-            "I only recognize `/chatbot on` and /chatbot `off only`"
+            "من فقط `/ربات روشن` و /ربات `خاموش را تشخیص میدهم`"
         )
         message.continue_propagation()
     status = message.text.split(None, 1)[1]
     chat_id = message.chat.id
-    if status == "ON" or status == "on" or status == "On":
-        lel = await edit_or_reply(message, "`Processing...`")
+    if status == "روشن" or status == "On" or status == "on":
+        lel = await edit_or_reply(message, "`در حال پردازش...`")
         lol = add_chat(int(message.chat.id))
         if not lol:
-            await lel.edit("Daisy AI Already Activated In This Chat")
+            await lel.edit("هوش مصنوعی سبک بد قبلاً در این چت فعال شده است ")
             return
         await lel.edit(
-            f"Daisy AI Successfully Added For Users In The Chat {message.chat.id}"
+            f"هوش مصنوعی سبک بد با موفقیت برای کاربران در چت اضافه شد {message.chat.id}"
         )
 
-    elif status == "OFF" or status == "off" or status == "Off":
-        lel = await edit_or_reply(message, "`Processing...`")
+    elif status == "خاموش" or status == "off" or status == "Off":
+        lel = await edit_or_reply(message, "`درحال پردازش...`")
         Escobar = remove_chat(int(message.chat.id))
         if not Escobar:
-            await lel.edit("Daisy AI Was Not Activated In This Chat")
+            await lel.edit("هوش مصنوعی سبک بد در این چت فعال نشده بود")
             return
         await lel.edit(
-            f"Daisy AI Successfully Deactivated For Users In The Chat {message.chat.id}"
+            f"سبک بد با موفقیت برای کاربران در چت غیرفعال شد {message.chat.id}"
         )
 
     elif status == "EN" or status == "en" or status == "english":
@@ -137,13 +137,13 @@ async def hmm(client, message):
         message.continue_propagation()
     if chat_id in en_chats:
         test = msg
-        test = test.replace("daisy", "Aco")
-        test = test.replace("Daisy", "Aco")
+        test = test.replace("badstyle", "Aco")
+        test = test.replace("badstyle", "Aco")
         response = await lunaQuery(
             test, message.from_user.id if message.from_user else 0
         )
-        response = response.replace("Aco", "Daisy")
-        response = response.replace("aco", "Daisy")
+        response = response.replace("Aco", "badstyle")
+        response = response.replace("aco", "badstyle")
 
         pro = response
         try:
@@ -195,15 +195,15 @@ async def hmm(client, message):
                 return
         # test = emoji.demojize(test.strip())
 
-        test = test.replace("daisy", "Aco")
-        test = test.replace("Daisy", "Aco")
+        test = test.replace("badstyle", "Aco")
+        test = test.replace("badstyle", "Aco")
         response = await lunaQuery(
             test, message.from_user.id if message.from_user else 0
         )
-        response = response.replace("Aco", "Daisy")
-        response = response.replace("aco", "Daisy")
-        response = response.replace("Luna", "Daisy")
-        response = response.replace("luna", "Daisy")
+        response = response.replace("Aco", "badstyle")
+        response = response.replace("aco", "badstyle")
+        response = response.replace("Luna", "badstyle")
+        response = response.replace("luna", "badstyle")
         pro = response
         if not "en" in lan and not lan == "":
             try:
@@ -269,12 +269,12 @@ async def inuka(client, message):
     # test = emoji.demojize(test.strip())
 
     # Kang with the credits bitches @InukaASiTH
-    test = test.replace("daisy", "Aco")
-    test = test.replace("Daisy", "Aco")
+    test = test.replace("badstyle", "Aco")
+    test = test.replace("badstyle", "Aco")
 
     response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
-    response = response.replace("Aco", "Daisy")
-    response = response.replace("aco", "Daisy")
+    response = response.replace("Aco", "badstyle")
+    response = response.replace("aco", "badstyle")
 
     pro = response
     if not "en" in lan and not lan == "":
@@ -288,7 +288,7 @@ async def inuka(client, message):
 
 
 @BadStyle.on_message(
-    filters.regex("bad|style|BadStyle|BadStyle|BadStyle")
+    filters.regex("بد استایل|بداستایل|سبک بد|ربات|رباط|هوش مصنوعی|BadStyle|badstyle|Bad Style|bal style")
     & ~filters.bot
     & ~filters.via_bot
     & ~filters.forwarded
@@ -343,11 +343,11 @@ async def inuka(client, message):
 
     # test = emoji.demojize(test.strip())
 
-    test = test.replace("daisy", "Aco")
-    test = test.replace("Daisy", "Aco")
+    test = test.replace("badstyle", "Aco")
+    test = test.replace("badstyle", "Aco")
     response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
-    response = response.replace("Aco", "Daisy")
-    response = response.replace("aco", "Daisy")
+    response = response.replace("Aco", "badstyle")
+    response = response.replace("aco", "badstyle")
 
     pro = response
     if not "en" in lan and not lan == "":
@@ -364,17 +364,17 @@ async def inuka(client, message):
 
 
 __help__ = """
-<b> Chatbot </b>
-DAISY AI 3.0 IS THE ONLY AI SYSTEM WHICH CAN DETECT & REPLY UPTO 200 LANGUAGES
+<b> ربات چت </b>
+ربات بداستایل تنها سیستم هوش مصنوعی است که می تواند تا 200 زبان را شناسایی و پاسخ دهد
 
- - /chatbot [ON/OFF]: Enables and disables AI Chat mode (EXCLUSIVE)
- - /chatbot EN : Enables English only chatbot
+ - /ربات [/ربات خاموش ][/ربات روشن]: حالت چت مصنوعی را فعال و غیرفعال می کند
+ - /chatbot EN : فقط چت بات انگلیسی را فعال می کند
  
  
-<b> Assistant </b>
- - /ask [question]: Ask question from daisy
- - /ask [reply to voice note]: Get voice reply
+<b> دستیار </b>
+ - /ask [سوال]: از بد استایل سوال بپرسید
+ - /ask [ریپلای به یادداشت صوتی]: دریافت پاسخ صوتی
  
 """
 
-__mod_name__ = "AI Assistant"
+__mod_name__ = "دستیار هوش مصنوعی"
