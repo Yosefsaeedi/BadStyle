@@ -1,0 +1,3 @@
+files:
+  - source: BadStyle/localization/en.yaml
+    translation: /**/BadStyle/localization/%locale_with_underscore%.yaml
