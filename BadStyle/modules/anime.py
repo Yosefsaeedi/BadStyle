@@ -1,9 +1,7 @@
-# Copyright (C) 2018 - 2020 MrYacha. All rights reserved. Source code available under the AGPL.
-# Copyright (C) 2021 HitaloSama.
-# Copyright (C) 2021 TeamBadStyle
-# Copyright (C) 2020 Inuka Asith
+# Copyright (C) 2018 - 2020 - 2021 yousef saeedi. All rights reserved. Source code available under the AGPL.
+# Copyright (C) 2021 BadStyle
 
-# This file is part of Daisy (Telegram Bot)
+# This file is part of badstylebot (Telegram Bot)
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -42,34 +40,34 @@ from .utils.disable import disableable_dec
 url = "https://graphql.anilist.co"
 
 
-@register(cmds="airing")
+@register(cmds="انیم")
 @disableable_dec("airing")
 async def anime_airing(message):
     search_str = message.text.split(" ", 1)
     if len(search_str) == 1:
-        await message.reply("Provide anime name!")
+        await message.reply("نام انیمه را وارد کنید!")
         return
 
     variables = {"search": search_str[1]}
     response = requests.post(
         url, json={"query": airing_query, "variables": variables}
     ).json()["data"]["Media"]
-    ms_g = f"<b>Name</b>: <b>{response['title']['romaji']}</b>(<code>{response['title']['native']}</code>)\n<b>ID</b>: <code>{response['id']}</code>"
+    ms_g = f"<b>نام</b>: <b>{response['title']['romaji']}</b>(<code>{response['title']['native']}</code>)\n<b>ID</b>: <code>{response['شناسه']}</code>"
     if response["nextAiringEpisode"]:
         airing_time = response["nextAiringEpisode"]["timeUntilAiring"] * 1000
         airing_time_final = t(airing_time)
-        ms_g += f"\n<b>Episode</b>: <code>{response['nextAiringEpisode']['episode']}</code>\n<b>Airing In</b>: <code>{airing_time_final}</code>"
+        ms_g += f"\n<b>قسمت</b>: <code>{response['nextAiringEpisode']['episode']}</code>\n<b>زمان باقی مانده</b>: <code>{airing_time_final}</code>"
     else:
-        ms_g += f"\n<b>Episode</b>: <code>{response['episodes']}</code>\n<b>Status</b>: <code>N/A</code>"
+        ms_g += f"\n<b>قسمت</b>: <code>{response['episodes']}</code>\n<b>وضعیت</b>: <code>N/A</code>"
     await message.reply(ms_g)
 
 
-@register(cmds="anime")
+@register(cmds="انیمه")
 @disableable_dec("anime")
 async def anime_search(message):
     search = message.text.split(" ", 1)
     if len(search) == 1:
-        await message.reply("Provide anime name!")
+        await message.reply("نام انیمه را وارد کنید!")
         return
     else:
         search = search[1]
@@ -80,11 +78,11 @@ async def anime_search(message):
         .get("Media", None)
     )
     if json:
-        msg = f"<b>{json['title']['romaji']}</b>(<code>{json['title']['native']}</code>)\n<b>Type</b>: {json['format']}\n<b>Status</b>: {json['status']}\n<b>Episodes</b>: {json.get('episodes', 'N/A')}\n<b>Duration</b>: {json.get('duration', 'N/A')} Per Ep.\n<b>Score</b>: {json['averageScore']}\n<b>Genres</b>: <code>"
+        msg = f"<b>{json['title']['romaji']}</b>(<code>{json['title']['native']}</code>)\n<b>نوع</b>: {json['format']}\n<b>وضعیت</b>: {json['status']}\n<b>قسمت ها</b>: {json.get('episodes', 'N/A')}\n<b>مدت زمان</b>: {json.get('duration', 'N/A')} در هر قسمت.\n<b>نمره</b>: {json['averageScore']}\n<b>ژانرها</b>: <code>"
         for x in json["genres"]:
             msg += f"{x}, "
         msg = msg[:-2] + "</code>\n"
-        msg += "<b>Studios</b>: <code>"
+        msg += "<b>استودیوها</b>: <code>"
         for x in json["studios"]["nodes"]:
             msg += f"{x['name']}, "
         msg = msg[:-2] + "</code>\n"
@@ -96,7 +94,7 @@ async def anime_search(message):
             if site == "youtube":
                 trailer = "https://youtu.be/" + trailer_id
         description = (
-            json.get("description", "N/A")
+            json.get("توضیحات", "N/A")
             .replace("<i>", "")
             .replace("</i>", "")
             .replace("<br>", "")
@@ -105,12 +103,12 @@ async def anime_search(message):
         image = info.replace("anilist.co/anime/", "img.anili.st/media/")
         if trailer:
             buttons = InlineKeyboardMarkup().add(
-                InlineKeyboardButton(text="More Info", url=info),
-                InlineKeyboardButton(text="Trailer 🎬", url=trailer),
+                InlineKeyboardButton(text="اطلاعات بیشتر", url=info),
+                InlineKeyboardButton(text="تریلر 🎬", url=trailer),
             )
         else:
             buttons = InlineKeyboardMarkup().add(
-                InlineKeyboardButton(text="More Info", url=info)
+                InlineKeyboardButton(text="اطلاعات بیشتر", url=info)
             )
 
         if image:
@@ -123,12 +121,12 @@ async def anime_search(message):
             await message.reply(msg)
 
 
-@register(cmds="character")
+@register(cmds="شخصیت")
 @disableable_dec("character")
 async def character_search(message):
     search = message.text.split(" ", 1)
     if len(search) == 1:
-        await message.reply("Provide character name!")
+        await message.reply("نام شخصیت مورد نظر را وارد کنید!")
         return
     search = search[1]
     variables = {"query": search}
@@ -139,7 +137,7 @@ async def character_search(message):
     )
     if json:
         ms_g = f"<b>{json.get('name').get('full')}</b>(<code>{json.get('name').get('native')}</code>)\n"
-        description = (f"{json['description']}").replace("__", "")
+        توضیحات = (f"{json['description']}").replace("__", "")
         site_url = json.get("siteUrl")
         ms_g += shorten(description, site_url)
         image = json.get("image", None)
@@ -321,19 +319,30 @@ def quote(_, message):
 
 # added ganime search based on gogoanime2.org
 
-__mod_name__ = "Anime"
+__mod_name__ = "انیـمـه"
 
 __help__ = """
-Get information about anime, manga or anime characters.
-
-<b>Available commands:</b>
-- /anime (anime): returns information about the anime.
-- /character (character): returns information about the character.
-- /manga (manga): returns information about the manga.
-- /airing (anime): returns anime airing info.
-- /kaizoku (anime): search an anime on animekaizoku.com
-- /kayo (anime): search an anime on animekayo.com
-- /ganime (anime): search an anime on gogoanime.so
-- /upcoming: returns a list of new anime in the upcoming seasons.
-- /aq : get anime random quote
+🤹‍♂اطلاعاتی درباره انیمه یا مانگا یا شخصیت های آنها دریافت میکنید🤹‍♀ متاسفانه سایت ایرانی برای دریافت اطلاعات وجود نداشت و ازسایت هایی با زبان خارجی استفاده شد 🤕
+ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+دستــورات 🏵
+ـــــــــــــــــــــــــــــ
+/انیم 
+مثال👈 /انیم one piece
+مدت زمان باقی مانده تا شروع انیمه
+ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+/انیمه
+مثال👈 /انیمه one piece
+ اطلاعات مربوط به انیمه 
+ـــــــــــــــــــــــــــــــــــــــــــــــــــــ
+/شخصیت
+مثال👈 /شخصیت luffi
+اطلاعات مربوط به شخصیت ها
+ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+/مانگا
+مثال👈 /مانگا one piece
+اطلاعات مربوط به مانگا
+ـــــــــــــــــــــــــــــــــــــــــــــــــ
+/بزودی
+لیست جدید فصل بعد انیمها
+ــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
 """
