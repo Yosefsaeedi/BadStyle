@@ -39,7 +39,7 @@ from .utils.anime import (
 )
 from .utils.disable import disableable_dec
 
-url = "https://graphql.anilist.co"
+url = "https://anime-list29.site"
 
 
 @register(cmds="airing")
