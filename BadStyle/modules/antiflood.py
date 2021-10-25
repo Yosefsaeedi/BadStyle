@@ -1,8 +1,7 @@
-# Copyright (C) 2018 - 2020 MrYacha. All rights reserved. Source code available under the AGPL.
-# Copyright (C) 2021 TeamBadStyle
-# Copyright (C) 2020 Inuka Asith
+# Copyright (C) 2018 - 2020 - 2021 yousef saeedi. All rights reserved. Source code available under the AGPL.
+# Copyright (C) 2021 BadStyle
 
-# This file is part of Daisy (Telegram Bot)
+# This file is part of badstylebot (Telegram Bot)
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -372,7 +371,7 @@ async def __import__(chat_id: int, data: dict):  # noqa
     await db.antiflood.update_one({"chat_id": chat_id}, {"$set": data})
 
 
-__mod_name__ = "AntiFlood"
+__mod_name__ = "قفل رگباری"
 
 __help__ = """
 You know how sometimes, people join, send 100 messages, and ruin your chat? With antiflood, that happens no more!
