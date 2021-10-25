@@ -121,6 +121,4 @@ pygithub
 
 tzlocal==2.0
 yt_dlp
-wikipedia
-
 
