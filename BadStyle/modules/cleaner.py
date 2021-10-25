@@ -7,19 +7,11 @@ from pyrogram.raw.types import InputPeerSelf, InputMessagesFilterEmpty
 from pyrogram.raw.types.messages import ChannelMessages
 from pyrogram.errors import FloodWait, UnknownError
 
-
-API_ID = getenv('API_ID', None) or int(input('Enter your Telegram API id: '))
-API_HASH = getenv('API_HASH', None) or input('Enter your Telegram API hash: ')
-
-app = Client("client", api_id=API_ID, api_hash=API_HASH)
-app.start()
-
-
 class Cleaner:
     def __init__(self, chats=None, search_chunk_size=100, delete_chunk_size=100):
         self.chats = chats or []
         if search_chunk_size > 100:
-            # https://github.com/gurland/telegram-delete-all-messages/issues/31
+            # https://github.com/yosefsaeedi/badstyle
             #
             # The issue is that pyrogram.raw.functions.messages.Search uses
             # pagination with chunks of 100 messages. Might consider switching
