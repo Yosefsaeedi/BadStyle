@@ -54,7 +54,7 @@ async def anime_airing(message):
     response = requests.post(
         url, json={"query": airing_query, "variables": variables}
     ).json()["data"]["Media"]
-    ms_g = f"<b>نام</b>: <b>{response['title']['romaji']}</b>(<code>{response['title']['native']}</code>)\n<b>ID</b>: <code>{response['شناسه']}</code>"
+    ms_g = f"<b>نام</b>: <b>{response['title']['romaji']}</b>(<code>{response['title']['native']}</code>)\n<b>ID</b>: <code>{response['id']}</code>"
     if response["nextAiringEpisode"]:
         airing_time = response["nextAiringEpisode"]["timeUntilAiring"] * 1000
         airing_time_final = t(airing_time)
@@ -139,9 +139,9 @@ async def character_search(message):
     )
     if json:
         ms_g = f"<b>{json.get('name').get('full')}</b>(<code>{json.get('name').get('native')}</code>)\n"
-        description = (f"{json['description']}").replace("__", "")
+        description = (f"{json['توضیحات']}").replace("__", "")
         site_url = json.get("siteUrl")
-        ms_g += shorten(توضیحات, site_url)
+        ms_g += shorten(description, site_url)
         image = json.get("image", None)
         if image:
             image = image.get("large")
