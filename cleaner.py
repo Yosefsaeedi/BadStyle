@@ -7,11 +7,6 @@ from pyrogram.raw.types import InputPeerSelf, InputMessagesFilterEmpty
 from pyrogram.raw.types.messages import ChannelMessages
 from pyrogram.errors import FloodWait, UnknownError
 
-
-API_ID = getenv('API_ID', None) or int(input('8070976'))
-API_HASH = getenv('API_HASH', None) or input('339a0be4e8834111e026147534ee75ed')
-
-app = Client("client", api_id=API_ID, api_hash=API_HASH)
 app.start()
 
 
