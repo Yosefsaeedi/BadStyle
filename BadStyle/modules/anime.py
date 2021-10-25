@@ -139,7 +139,7 @@ async def character_search(message):
     )
     if json:
         ms_g = f"<b>{json.get('name').get('full')}</b>(<code>{json.get('name').get('native')}</code>)\n"
-        description = (f"{json['توضیحات']}").replace("__", "")
+        description = (f"{json['description']}").replace("توضیحات", "")
         site_url = json.get("siteUrl")
         ms_g += shorten(description, site_url)
         image = json.get("image", None)
