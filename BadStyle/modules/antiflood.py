@@ -252,14 +252,14 @@ async def antiflood_expire_proc(
         await state.finish()
 
 
-@register(cmds=["antiflood", "flood"], is_admin=True)
+@register(cmds=["رگبار", "قفل رگباری"], is_admin=True)
 @chat_connection(admin=True)
 @get_strings_dec("antiflood")
 async def antiflood(message: Message, chat: dict, strings: dict):
     if not (data := await get_data(chat["chat_id"])):
         return await message.reply(strings["not_configured"])
 
-    if message.get_args().lower() in ("off", "0", "no"):
+    if message.get_args().lower() in ("غیرفعال", "0", "no"):
         await db.antiflood.delete_one({"chat_id": chat["chat_id"]})
         await get_data.reset_cache(chat["chat_id"])
         return await message.reply(
@@ -284,12 +284,12 @@ async def antiflood(message: Message, chat: dict, strings: dict):
     )
 
 
-@register(cmds=["setfloodaction"], user_can_restrict_members=True)
+@register(cmds=["رگباری"], user_can_restrict_members=True)
 @need_args_dec()
 @chat_connection(admin=True)
 @get_strings_dec("antiflood")
 async def setfloodaction(message: Message, chat: dict, strings: dict):
-    SUPPORTED_ACTIONS = ["kick", "ban", "mute", "tmute", "tban"]  # noqa
+    SUPPORTED_ACTIONS = ["حذف", "بن", "سکوت", "زمان", "tban"]  # noqa
     if (action := message.get_args().lower()) not in SUPPORTED_ACTIONS:
         return await message.reply(
             strings["invalid_args"].format(
@@ -299,7 +299,7 @@ async def setfloodaction(message: Message, chat: dict, strings: dict):
 
     if action.startswith("t"):
         await message.reply(
-            "Send a time for t action", allow_sending_without_reply=True
+            "یک زمان مشخص کنید مثلا ۵د", allow_sending_without_reply=True
         )
         redis.set(f"floodactionstate:{chat['chat_id']}", action)
         return await AntiFloodActionState.set_time_proc.set()
@@ -317,7 +317,7 @@ async def setfloodaction(message: Message, chat: dict, strings: dict):
     allow_kwargs=True,
 )
 @chat_connection(admin=True)
-@get_strings_dec("antiflood")
+@get_strings_dec("رگبار")
 async def set_time_config(
     message: Message, chat: dict, strings: dict, state: FSMContext, **_
 ):
@@ -374,33 +374,36 @@ async def __import__(chat_id: int, data: dict):  # noqa
 __mod_name__ = "قفل رگباری"
 
 __help__ = """
-You know how sometimes, people join, send 100 messages, and ruin your chat? With antiflood, that happens no more!
+⚔️جلوگیری از پیام های رگباری در گروه با فعال کردن این قفل کسانی که پیام های رگباری ارسال میکنند از گروه محروم  میشن⚔️ برای فعال کردن اول باید ان را تنظیم کنید 
+ــ🧎ــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ
+دستـورات فقـط بـرای مدیـران
+ــــــــــــــــــــــ🧑‍🦯ـــــــــــــــــــــــــــــــــــــــــــــــــــ
+/رگبار
+پیکربندی فعلی را نشان میدهد 
+ـــــــــــــــــــــــــــــــــــــ🤸ــــــــــــــــــــــــــــــــــــ
+/رگبار غیرفعال
+قفل رگباری را غیرفعال میکند
+ــــــــــــــــــــــــــــــــــــــــــــــــــــــ⛹️ـــــــــــــــــــ
+/تنظیم رگبار (حد)
+حد قفل رگباری را تنظیم میکند جایگزینی (حد) با یک عدد صحیح ،باید کمتر از ۲۰۰ باشد
+هنگام تنظیم ما از شما میخواهیم ک یک زمان انقضا ارسال کنید 
+ـــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــ🚴ــــــــ
+/رگباری 
 
-Antiflood allows you to take action on users that send more than x messages in a row.
+🔆اقدامی تنظیم میکند که وقتی کاربر از حد قفل رگباری فراتر رود انجام شود🔆
 
-<b>Admins only:</b>
-- /antiflood: Gives you current configuration of antiflood in the chat
-- /antiflood off: Disables Antiflood
-- /setflood (limit): Sets flood limit
+اقدامات پشتیبانی شده🎈
 
-Replace (limit) with any integer, should be less than 200. When setting up, Daisy would ask you to send expiration time, if you dont understand what this expiration time for? User who sends specified limit of messages consecutively within this TIME, would be kicked, banned whatever the action is. if you dont want this TIME, wants to take action against those who exceeds specified limit without mattering TIME INTERVAL between the messages. you can reply to question with 0
+( بن ) کاربر ban میشود
 
-<b>Configuring the time:</b>
-<code>2m</code> = 2 minutes
-<code>2h</code> = 2 hours
-<code>2d</code> = 2 days
+( حذف) از گروه حذف میشود
 
-<b>Example:</b>
-Me: <code>/setflood 10</code>
-Daisy: <code>Please send expiration time [...]</code>
-Me: <code>5m</code> (5 minutes)
-DONE!
+(زمان) سکوت کردن فرد و لغو سکوت بازمان مشخص شده مثلا 👈 /رگبارتنظیم زمان
+بعد من یه پیام به شما میدهم وشمازمان رو انتخاب میکنید مثلا👈 ۵د
+(د =دقیقه)(س =ساعت)(ر =روز)
 
-- /setfloodaction (action): Sets the action to taken when user exceeds flood limit
-
-<b>Currently supported actions:</b>
-<code>ban</code>
-<code>mute</code>
-<code>kick</code>
-<i>More soon™</i>
+(سکوت) کاربر دیگر نمیتواند چت کند اگر خواستید بعدا کاربر بتواند چت کند کافیه روی کاربر ریپلای بزنید و دستور
+/لغوسکوت رو اجرا کنید یا 
+/لغوسکوت @شناسه کاربر
+ــــــــــــــــــــــــــــــــــــــــــــپــایـــانـــــــENDـ🏇
 """
