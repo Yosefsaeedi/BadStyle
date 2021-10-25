@@ -181,7 +181,7 @@ class AntifloodEnforcer(BaseMiddleware):
 
 
 @register(
-    cmds=["تنظیم رگبار"], user_can_restrict_members=True, bot_can_restrict_members=True
+    cmds=["رگبارتنظیم"], user_can_restrict_members=True, bot_can_restrict_members=True
 )
 @need_args_dec()
 @chat_connection()
