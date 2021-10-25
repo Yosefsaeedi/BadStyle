@@ -188,10 +188,10 @@ class AntifloodEnforcer(BaseMiddleware):
 @get_strings_dec("antiflood")
 async def setflood_command(message: Message, chat: dict, strings: dict):
     try:
-        args = int(get_args(message)[۰])
+        args = int(get_args(message)[0])
     except ValueError:
         return await message.reply(strings["invalid_args:setflood"])
-    if args > ۲۰۰:
+    if args > 200:
         return await message.reply(strings["overflowed_count"])
 
     await AntiFloodConfigState.expiration_proc.set()
