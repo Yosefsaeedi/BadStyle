@@ -1,7 +1,9 @@
-# Copyright (C) 2018 - 2020 - 2021 yousef saeedi. All rights reserved. Source code available under the AGPL.
-# Copyright (C) 2021 BadStyle
+# Copyright (C) 2018 - 2020 MrYacha. All rights reserved. Source code available under the AGPL.
+# Copyright (C) 2021 HitaloSama.
+# Copyright (C) 2021 TeamBadStyle
+# Copyright (C) 2020 Inuka Asith
 
-# This file is part of badstylebot (Telegram Bot)
+# This file is part of Daisy (Telegram Bot)
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -137,9 +139,9 @@ async def character_search(message):
     )
     if json:
         ms_g = f"<b>{json.get('name').get('full')}</b>(<code>{json.get('name').get('native')}</code>)\n"
-        توضیحات = (f"{json['description']}").replace("__", "")
+        description = (f"{json['description']}").replace("__", "")
         site_url = json.get("siteUrl")
-        ms_g += shorten(description, site_url)
+        ms_g += shorten(توضیحات, site_url)
         image = json.get("image", None)
         if image:
             image = image.get("large")
