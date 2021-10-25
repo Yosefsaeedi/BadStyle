@@ -1,9 +1,7 @@
-# Copyright (C) 2018 - 2020 MrYacha. All rights reserved. Source code available under the AGPL.
-# Copyright (C) 2021 HitaloSama.
-# Copyright (C) 2021 TeamBadStyle
-# Copyright (C) 2020 Inuka Asith
+# Copyright (C) 2018 - 2020 yousef saeedi. All rights reserved. Source code available under the AGPL.
+# Copyright (C) 2021 BadStyle
 
-# This file is part of Daisy (Telegram Bot)
+# This file is part of Badstylebot (Telegram Bot)
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -150,12 +148,12 @@ async def character_search(message):
             await message.reply(ms_g)
 
 
-@register(cmds="manga")
+@register(cmds="م")
 @disableable_dec("manga")
 async def manga_search(message):
     search = message.text.split(" ", 1)
     if len(search) == 1:
-        await message.reply("Provide manga name!")
+        await message.reply("لطفا نام مانگا را بنویسید!")
         return
     search = search[1]
     variables = {"search": search}
@@ -179,12 +177,12 @@ async def manga_search(message):
             if title_native:
                 ms_g += f"(<code>{title_native}</code>)"
         if start_date:
-            ms_g += f"\n<b>Start Date</b> - <code>{start_date}</code>"
+            ms_g += f"\n<b>تاریخ شروع</b> - <code>{start_date}</code>"
         if status:
-            ms_g += f"\n<b>Status</b> - <code>{status}</code>"
+            ms_g += f"\n<b>وضعیت</b> - <code>{status}</code>"
         if score:
-            ms_g += f"\n<b>Score</b> - <code>{score}</code>"
-        ms_g += "\n<b>Genres</b> - "
+            ms_g += f"\n<b>رتبه</b> - <code>{score}</code>"
+        ms_g += "\n<b>ژانرها</b> - "
         for x in json.get("genres", []):
             ms_g += f"{x}, "
         ms_g = ms_g[:-2]
@@ -205,7 +203,7 @@ async def manga_search(message):
             await message.reply(ms_g)
 
 
-@register(cmds="upcoming")
+@register(cmds="بزودی")
 @disableable_dec("upcoming")
 async def upcoming(message):
     jikan = jikanpy.jikan.Jikan()
@@ -215,7 +213,7 @@ async def upcoming(message):
     upcoming_message = ""
 
     for entry_num in range(len(upcoming_list)):
-        if entry_num == 10:
+        if entry_num == 20:
             break
         upcoming_message += f"{entry_num + 1}. {upcoming_list[entry_num]}\n"
 
@@ -229,7 +227,7 @@ async def site_search(message, site: str):
     try:
         search_query = args[1]
     except IndexError:
-        await message.reply("Give something to search")
+        await message.reply("چه چیزی جستجو کنم")
         return
 
     if site == "kaizoku":
@@ -321,7 +319,7 @@ def quote(_, message):
 
 # added ganime search based on gogoanime2.org
 
-__mod_name__ = "انیـمـه"
+__mod_name__ = "انیـمـــه"
 
 __help__ = """
 🤹‍♂اطلاعاتی درباره انیمه یا مانگا یا شخصیت های آنها دریافت میکنید🤹‍♀ متاسفانه سایت ایرانی برای دریافت اطلاعات وجود نداشت و ازسایت هایی با زبان خارجی استفاده شد 🤕
