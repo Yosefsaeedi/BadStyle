@@ -257,7 +257,7 @@ async def antiflood_expire_proc(
 @get_strings_dec("antiflood")
 async def antiflood(message: Message, chat: dict, strings: dict):
     if not (data := await get_data(chat["chat_id"])):
-        return await message.reply(strings["not_configured"])
+        return await message.reply(strings["هنوز در چت پیکربندی نشده ان را تنظیم کنید"])
 
     if message.get_args().lower() in ("غیرفعال", "0", "no"):
         await db.antiflood.delete_one({"chat_id": chat["chat_id"]})
